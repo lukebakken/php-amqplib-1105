@@ -17,6 +17,7 @@ start-rabbitmq: config certs
 	[ -f "$(CURDIR)/rabbitmq-server-generic-unix-$(RMQ_VERSION).tar.xz" ] || curl -LO https://github.com/rabbitmq/rabbitmq-server/releases/download/v$(RMQ_VERSION)/rabbitmq-server-generic-unix-$(RMQ_VERSION).tar.xz
 	[ -d "$(CURDIR)/rabbitmq_server-$(RMQ_VERSION)" ] || tar xf "$(CURDIR)/rabbitmq-server-generic-unix-$(RMQ_VERSION).tar.xz"
 	RABBITMQ_CONFIG_FILE="$(CURDIR)/rabbitmq.conf" "$(CURDIR)/rabbitmq_server-$(RMQ_VERSION)/sbin/rabbitmq-server" -detached
+	sleep 10 && $(CURDIR)/rabbitmq_server-$(RMQ_VERSION)/sbin/rabbitmqctl await_startup
 
 .PHONY: stop-rabbitmq
 stop-rabbitmq:
