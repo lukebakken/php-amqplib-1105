@@ -1,0 +1,3 @@
+rabbitmq.conf
+rabbitmq-server-*
+rabbitmq_server-*/

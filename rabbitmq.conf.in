@@ -1,0 +1,24 @@
+loopback_users = none
+
+log.console = true
+log.console.level = debug
+
+listeners.tcp.default = 5672
+listeners.ssl.default = 5671
+
+ssl_options.certfile   = @@PWD@@/tls-gen/basic/result/server_localhost_certificate.pem
+ssl_options.keyfile    = @@PWD@@/tls-gen/basic/result/server_localhost_key.pem
+ssl_options.cacertfile = @@PWD@@/tls-gen/basic/result/ca_certificate.pem
+ssl_options.verify     = verify_none
+ssl_options.fail_if_no_peer_cert = false
+ssl_options.secure_renegotiate = true
+
+management.tcp.port = 15672
+management.ssl.port = 15671
+
+management.ssl.certfile   = @@PWD@@/tls-gen/basic/result/server_localhost_certificate.pem
+management.ssl.keyfile    = @@PWD@@/tls-gen/basic/result/server_localhost_key.pem
+management.ssl.cacertfile = @@PWD@@/tls-gen/basic/result/ca_certificate.pem
+management.ssl.verify     = verify_none
+management.ssl.fail_if_no_peer_cert = false
+management.ssl.secure_renegotiate = true
