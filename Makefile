@@ -9,6 +9,7 @@ rabbitmq.conf:
 config: rabbitmq.conf
 
 $(CURDIR)/tls-gen/basic/result/ca_certificate.pem:
+	git submodule update --init
 	$(MAKE) -C tls-gen/basic CN=localhost
 certs: $(CURDIR)/tls-gen/basic/result/ca_certificate.pem
 
@@ -25,10 +26,10 @@ stop-rabbitmq:
 
 .PHONY: openssl-connect
 openssl-connect:
-	openssl s_client -connect localhost:5671 -no_tls1 -no_tls1_1 -CAfile "$(CURDIR)/tls-gen/basic/result/ca_certificate.pem"
+	openssl s_client -connect localhost:5671 -CAfile "$(CURDIR)/tls-gen/basic/result/ca_certificate.pem"
 
-.PHONY: run-aio-pika
-run-aio-pika:
+.PHONY: run-aio-pika-repro
+run-aio-pika-repro:
 	cd $(CURDIR)/aio-pika && pipenv install --dev && pipenv run repro
 
 .PHONY: run-php-repro
