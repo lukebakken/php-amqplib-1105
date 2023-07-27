@@ -26,3 +26,11 @@ stop-rabbitmq:
 .PHONY: openssl-connect
 openssl-connect:
 	openssl s_client -connect localhost:5671 -no_tls1 -no_tls1_1 -CAfile "$(CURDIR)/tls-gen/basic/result/ca_certificate.pem"
+
+.PHONY: run-aio-pika
+run-aio-pika:
+	cd $(CURDIR)/aio-pika && pipenv install --dev && pipenv run repro
+
+.PHONY: run-php-repro
+run-php-repro:
+	cd $(CURDIR)/php-repro && composer install && php repro.php
